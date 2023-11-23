@@ -7,6 +7,12 @@ execute pathogen#infect()
 
 " plugins:
 call plug#begin()
+	Plug 'tpope/vim-fugitive'
+
+	Plug 'Raimondi/delimitMate'
+	Plug 'tpope/vim-surround'
+	
+	Plug 'vim-airline/vim-airline'
 
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -15,13 +21,12 @@ call plug#begin()
 
 	Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
-"	Plug 'preservim/nerdtree'
+	Plug 'preservim/nerdtree'
 
 "   experimental:
-	Plug 'tpope/vim-surround'
 " 	Plug 'w0rp/ale'
 	Plug 'editorconfig/editorconfig-vim'
-	Plug 'airblade/vim-gitgutter'
+""	Plug 'airblade/vim-gitgutter'
 
 "   has to be last:
 	Plug 'ryanoasis/vim-devicons'
