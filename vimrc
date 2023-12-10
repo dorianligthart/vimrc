@@ -1,13 +1,19 @@
-" CtrlP :
-
-" ctrlp pathogen plugin:
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_by_filename = 0
-execute pathogen#infect()
-
 " plugins:
 call plug#begin()
+	Plug 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_working_path_mode = 'ra'
+
+	Plug 'kevinoid/vim-jsonc'
+
 	Plug 'tpope/vim-fugitive'
+
+	Plug 'Jorengarenar/fauxClip'
+let g:fauxClip_copy_cmd         = 'xclip -f -i -selection clipboard'
+let g:fauxClip_copy_primary_cmd = 'xclip -f -i'
+let g:fauxClip_paste_cmd         = 'xclip -o -selection clipboard'
+let g:fauxClip_paste_primary_cmd = 'xclip -o'
+let g:fauxClip_suppress_errors = 0
+let g:fauxClip_always_use = 1
 
 	Plug 'Raimondi/delimitMate'
 	Plug 'tpope/vim-surround'
@@ -24,7 +30,8 @@ call plug#begin()
 	Plug 'preservim/nerdtree'
 
 "   experimental:
-" 	Plug 'w0rp/ale'
+	Plug 'w0rp/ale'
+	
 	Plug 'editorconfig/editorconfig-vim'
 ""	Plug 'airblade/vim-gitgutter'
 
@@ -33,7 +40,6 @@ call plug#begin()
 
 call plug#end()
 
-
 " GENERAL :
 set textwidth=80
 set colorcolumn=+1
@@ -41,7 +47,6 @@ set tabstop=4
 set shiftwidth=4
 set encoding=UTF-8
 set mouse=a
-
 
 " Make \n considered as part of words
 set iskeyword+=10
@@ -70,100 +75,101 @@ set nohlsearch
 set rnu
 autocmd CursorMoved * set number
 
+" THEME :
 " COLORSCHEME :
 colorscheme ron
 set background=dark
 
-hi Boolean ctermfg=white
-hi Character ctermfg=white
-hi ColorColumn ctermfg=white
-hi Comment ctermfg=green
-hi Conceal ctermfg=white
-hi Conditional ctermfg=white
-hi Constant ctermfg=white
-hi Cursor ctermfg=white
-hi CursorColumn ctermfg=white
-hi CursorLine ctermfg=white
-hi CursorLineFold ctermfg=white
-hi CursorLineNr ctermfg=white
-hi CursorLineSign ctermfg=white
-hi Debug ctermfg=white
-hi Define ctermfg=white
-hi Delimiter ctermfg=white
-hi DiffAdd ctermfg=white
-hi DiffChange ctermfg=white
-hi DiffDelete ctermfg=white
-hi DiffText ctermfg=white
-hi Directory ctermfg=white
-hi EndOfBuffer ctermfg=white
-hi Error ctermfg=white
-hi ErrorMsg ctermfg=white
-hi Exception ctermfg=white
-hi Float ctermfg=white
-hi FoldColumn ctermfg=white
-hi Folded ctermfg=white
-hi Function ctermfg=white
-hi Identifier ctermfg=white
-hi Ignore ctermfg=white
-hi IncSearch ctermfg=white
-hi Include ctermfg=white
-hi Keyword ctermfg=white
-hi Label ctermfg=white
-hi LineNr ctermfg=white
-hi LineNrAbove ctermfg=white
-hi LineNrBelow ctermfg=white
-hi Macro ctermfg=white
-hi MatchParen ctermfg=white
-hi ModeMsg ctermfg=white
-hi MoreMsg ctermfg=white
-hi NonText ctermfg=white
-" 	normal = everything
-hi Normal ctermfg=white
-hi Number ctermfg=white
-hi Operator ctermfg=white
-hi Pmenu ctermfg=white
-hi PmenuSbar ctermfg=white
-hi PmenuSel ctermfg=white
-hi PmenuThumb ctermfg=white
-hi PreCondit ctermfg=white
-hi PreProc ctermfg=white
-hi Question ctermfg=white
-hi QuickFixLine ctermfg=white
-hi Repeat ctermfg=white
-hi Search ctermfg=white ctermbg=blue
-hi ShowMarksHL ctermfg=white
-hi SignColumn ctermfg=white
-hi Special ctermfg=white
-hi SpecialChar ctermfg=white
-hi SpecialComment ctermfg=white
-hi SpecialKey ctermfg=white
-hi SpellBad ctermfg=white
-hi SpellCap ctermfg=white
-hi SpellLocal ctermfg=white
-hi SpellRare ctermfg=white
-hi Statement ctermfg=white
-hi StatusLine ctermfg=white
-hi StatusLineNC ctermfg=white
-hi StatusLineTerm ctermfg=white
-hi StatusLineTermNC ctermfg=white
-hi StorageClass ctermfg=white
-hi String ctermfg=white
-hi Structure ctermfg=white
-hi TabLine ctermfg=white
-hi TabLineFill ctermfg=white
-hi TabLineSel ctermfg=white
-hi Tag ctermfg=white
-hi Title ctermfg=white
-hi Todo ctermfg=white
-hi ToolbarButton ctermfg=white
-hi ToolbarLine ctermfg=white
-hi Type ctermfg=white
-hi Typedef ctermfg=white
-hi Underlined ctermfg=white
-hi VertSplit ctermfg=white
-hi Visual ctermfg=white
-hi WarningMsg ctermfg=white
-hi WildMenu ctermfg=white
+" hi Boolean ctermfg=white
+" hi Character ctermfg=white
+" hi ColorColumn ctermfg=white
+" hi Comment ctermfg=green
+" hi Conceal ctermfg=white
+" hi Conditional ctermfg=white
+" hi Constant ctermfg=white
+" hi Cursor ctermfg=white
+" hi CursorColumn ctermfg=white
+" hi CursorLine ctermfg=white
+" hi CursorLineFold ctermfg=white
+" hi CursorLineNr ctermfg=white
+" hi CursorLineSign ctermfg=white
+" hi Debug ctermfg=white
+" hi Define ctermfg=white
+" hi Delimiter ctermfg=white
+" hi DiffAdd ctermfg=white
+" hi DiffChange ctermfg=white
+" hi DiffDelete ctermfg=white
+" hi DiffText ctermfg=white
+" hi Directory ctermfg=white
+" hi EndOfBuffer ctermfg=white
+" hi Error ctermfg=white
+" hi ErrorMsg ctermfg=white
+" hi Exception ctermfg=white
+" hi Float ctermfg=white
+" hi FoldColumn ctermfg=white
+" hi Folded ctermfg=white
+" hi Function ctermfg=gray
+" hi Identifier ctermfg=white
+" hi Ignore ctermfg=white
+" hi IncSearch ctermfg=white
+" hi Include ctermfg=white
+" hi Keyword ctermfg=white
+" hi Label ctermfg=white
+" hi LineNr ctermfg=white
+" hi LineNrAbove ctermfg=white
+" hi LineNrBelow ctermfg=white
+" hi Macro ctermfg=white
+" hi MatchParen ctermfg=white
+" hi ModeMsg ctermfg=white
+" hi MoreMsg ctermfg=white
+" hi NonText ctermfg=white
+" " 	normal = everything
+" hi Normal ctermfg=white
+" hi Number ctermfg=white
+" hi Operator ctermfg=white
+" hi Pmenu ctermfg=white
+" hi PmenuSbar ctermfg=white
+" hi PmenuSel ctermfg=white
+" hi PmenuThumb ctermfg=white
+" hi PreCondit ctermfg=white
+" hi PreProc ctermfg=white
+" hi Question ctermfg=white
+" hi QuickFixLine ctermfg=white
+" hi Repeat ctermfg=white
+" hi Search ctermfg=white ctermbg=blue
+" hi ShowMarksHL ctermfg=white
+" hi SignColumn ctermfg=white
+" hi Special ctermfg=white
+" hi SpecialChar ctermfg=white
+" hi SpecialComment ctermfg=white
+" hi SpecialKey ctermfg=white
+" hi SpellBad ctermfg=white
+" hi SpellCap ctermfg=white
+" hi SpellLocal ctermfg=white
+" hi SpellRare ctermfg=white
+" hi Statement ctermfg=white
+" hi StatusLine ctermfg=white
+" hi StatusLineNC ctermfg=white
+" hi StatusLineTerm ctermfg=white
+" hi StatusLineTermNC ctermfg=white
+" hi StorageClass ctermfg=white
+" hi String ctermfg=white
+" hi Structure ctermfg=white
+" hi TabLine ctermfg=white
+" hi TabLineFill ctermfg=white
+" hi TabLineSel ctermfg=white
+" hi Tag ctermfg=white
+" hi Title ctermfg=white
+" hi Todo ctermfg=white
+" hi ToolbarButton ctermfg=white
+" hi ToolbarLine ctermfg=white
+" hi Type ctermfg=white
+" hi Typedef ctermfg=white
+" hi Underlined ctermfg=white
+" hi VertSplit ctermfg=white
+" hi Visual ctermfg=white
+" hi WarningMsg ctermfg=white
+" hi WildMenu ctermfg=white
 " hi clear ctermfg=white
 " hi default ctermfg=white
 hi diffOnly ctermfg=white
