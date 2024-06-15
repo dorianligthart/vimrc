@@ -1,4 +1,4 @@
-syntax	on
+syntax on
 filetype plugin indent on
 set ts=2 sts=2 sw=2 et ai si
 set encoding=UTF-8
@@ -6,6 +6,10 @@ set tabstop=4
 set shiftwidth=4
 set mouse=a
 set showmatch showmode
+
+" folding:
+:set foldmethod=syntax
+:set foldmethod=indent
 
 " relative linenumbers
 set rnu
