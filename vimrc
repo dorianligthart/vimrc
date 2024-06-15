@@ -7,9 +7,9 @@ set shiftwidth=4
 set mouse=a
 set showmatch showmode
 
-" folding:
-:set foldmethod=syntax
-:set foldmethod=indent
+" autofolding:
+set foldmethod=syntax
+set foldmethod=indent
 
 " relative linenumbers
 set rnu
